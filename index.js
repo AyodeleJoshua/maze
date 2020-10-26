@@ -32,16 +32,39 @@ const walls = [
 World.add(world, walls);
 
 // Maze Generate
+
 const grid = Array(cells)
   .fill(null)
   .map(() => Array(cells).fill(false));
 
-const verticals = Array(3)
+const verticals = Array(cells)
   .fill(null)
-  .map(() => Array(2).fill(false));
+  .map(() => Array(cells - 1).fill(false));
 
-const horizontals =  Array(2)
+const horizontals =  Array(cells - 1)
   .fill(null)
-  .map(() => Array(3).fill(false));
+  .map(() => Array(cells).fill(false));
+
+  const startRow = Math.floor(Math.random() * cells);
+  const startColumn = Math.floor(Math.random() * cells);
+
+  const stepThroughCell = (row, column) => {
+    // If i have visited the cell at (row, column), thn return
+
+    // Mark this cell as being visited
+
+    // Assemble randomly ordered list of neighbors
+
+    // For each neighbors ...
+
+    // See if neighbor is out of bounds
+
+    // If we have visited neigbor, continue to next neigbor
+
+    // Remove a wall from either the horizontals or verticals array
+
+    // Visit that next cell
+  };
   
-console.log(horizontals);
+  stepThroughCell(startRow. startColumn);
+console.log(startRow, startColumn);
