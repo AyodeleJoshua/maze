@@ -33,6 +33,20 @@ World.add(world, walls);
 
 // Maze Generate
 
+const shuffle = (arr) => {
+  let counter = arr.length;
+
+  while (counter > 0) {
+    const index = Math.floor(Math.random() * counter);
+
+    conuter--;
+
+    [ arr[counter], arr[index] ] = [ arr[index], arr[counter] ];
+  }
+
+  return arr;
+};
+
 const grid = Array(cells)
   .fill(null)
   .map(() => Array(cells).fill(false));
@@ -48,23 +62,33 @@ const horizontals =  Array(cells - 1)
   const startRow = Math.floor(Math.random() * cells);
   const startColumn = Math.floor(Math.random() * cells);
 
-  const stepThroughCell = (row, column) => {
-    // If i have visited the cell at (row, column), thn return
+const stepThroughCell = (row, column) => {
+  // If i have visited the cell at (row, column), thn return
+  if (grid[row][column]) {
+    return;
+  }
 
-    // Mark this cell as being visited
+  // Mark this cell as being visited
+  grid[row][column] = true;
 
-    // Assemble randomly ordered list of neighbors
+  // Assemble randomly-ordered list of neighbors
+  const neighbors = [
+    [row - 1, column],
+    [row, column + 1],
+    [row + 1, column],
+    [row, column - 1]
+  ];
 
-    // For each neighbors ...
+  // For each neighbors ...
 
-    // See if neighbor is out of bounds
+  // See if neighbor is out of bounds
 
-    // If we have visited neigbor, continue to next neigbor
+  // If we have visited neigbor, continue to next neigbor
 
-    // Remove a wall from either the horizontals or verticals array
+  // Remove a wall from either the horizontals or verticals array
 
-    // Visit that next cell
-  };
+  // Visit that next cell
+};
   
-  stepThroughCell(startRow. startColumn);
-console.log(startRow, startColumn);
+stepThroughCell(startRow, startColumn);
+console.log(grid);
