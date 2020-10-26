@@ -32,3 +32,8 @@ const walls = [
 World.add(world, walls);
 
 // Maze Generate
+const grid = Array(cells)
+  .fill(null)
+  .map(() => Array(cells).fill(false));
+
+console.log(grid)
