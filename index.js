@@ -39,7 +39,7 @@ const shuffle = (arr) => {
   while (counter > 0) {
     const index = Math.floor(Math.random() * counter);
 
-    conuter--;
+    counter--;
 
     [ arr[counter], arr[index] ] = [ arr[index], arr[counter] ];
   }
@@ -72,12 +72,12 @@ const stepThroughCell = (row, column) => {
   grid[row][column] = true;
 
   // Assemble randomly-ordered list of neighbors
-  const neighbors = [
+  const neighbors = shuffle([
     [row - 1, column],
     [row, column + 1],
     [row + 1, column],
     [row, column - 1]
-  ];
+  ]);
 
   // For each neighbors ...
 
