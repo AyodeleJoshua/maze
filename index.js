@@ -59,8 +59,8 @@ const horizontals =  Array(cells - 1)
   .fill(null)
   .map(() => Array(cells).fill(false));
 
-  const startRow = Math.floor(Math.random() * cells);
-  const startColumn = Math.floor(Math.random() * cells);
+const startRow = Math.floor(Math.random() * cells);
+const startColumn = Math.floor(Math.random() * cells);
 
 const stepThroughCell = (row, column) => {
   // If i have visited the cell at (row, column), thn return
@@ -97,16 +97,24 @@ const stepThroughCell = (row, column) => {
       verticals[row][column - 1] = true;
     } else if (direction === 'right') {
       verticals[row][column] = true;
-    } else if (direction === 'top') {
+    } else if (direction === 'up') {
       horizontals[row - 1][column] = true;
-    }else if (direction === 'down') {
+    } else if (direction === 'down') {
       horizontals[row][column] = true;
     }
-    
+
+    // Visit that next cell
+    stepThroughCell(nextRow, nextColumn);
   }
 
-  // Visit that next cell
 };
-  
+
 stepThroughCell(1, 1);
-// console.log(grid);
+  
+horizontals.forEach(row => {
+  row.forEach(open => {
+    if (open) return;
+  
+    const wall = Bodies.rectangle()
+  });
+});
