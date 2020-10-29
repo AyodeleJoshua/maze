@@ -1,8 +1,8 @@
 // import Matter from 'matter-js';
 
-const { Engine, Render, Runner, World, Bodies, Body } = Matter;
+const { Engine, Render, Runner, World, Bodies, Body, Events } = Matter;
 
-const cells = 9;
+const cells = 3;
 const width = 600;
 const height = 600;
 
@@ -153,6 +153,7 @@ const goal = Bodies.rectangle(
   unitLength * .7,
   unitLength * .7,
   {
+    label: 'goals',
     isStatic: true
   }
 );
@@ -165,13 +166,15 @@ const ball = Bodies.circle(
   unitLength / 2,
   unitLength / 2,
   unitLength / 4,
+  {
+    label: 'balls'
+  }
 );
 
 World.add(world, ball);
 
 document.addEventListener('keydown', event => {
   const { x, y } = ball.velocity;
-  console.log(event)
 
   if (event.keyCode === 38) {
     Body.setVelocity(ball, { x, y: y - 5 });
@@ -190,4 +193,18 @@ document.addEventListener('keydown', event => {
   if (event.keyCode === 37) {
     Body.setVelocity(ball, { x: x - 5, y });
   }
+});
+
+// Win Condition
+
+Events.on(engine, 'collisionStart', event => {
+  event.pairs.forEach((collision) => {
+    const labels = ['balls', 'goals'];
+
+    if (labels.includes(collision.bodyA.label) && 
+        labels.includes(collision.bodyB.label)
+      ) {
+        console.log("win")
+    }
+  });
 });
