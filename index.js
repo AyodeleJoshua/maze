@@ -24,10 +24,10 @@ Runner.run(Runner.create(), engine);
 
 // Walls
 const walls = [
-  Bodies.rectangle(width / 2, 0, width, 40, {isStatic: true}),
-  Bodies.rectangle(width / 2, height, width, 40, {isStatic: true}),
-  Bodies.rectangle(0, height / 2, 40, height, {isStatic: true}),
-  Bodies.rectangle(width, height / 2, 40, height, {isStatic: true}),
+  Bodies.rectangle(width / 2, 0, width, 2, {isStatic: true}),
+  Bodies.rectangle(width / 2, height, width, 2, {isStatic: true}),
+  Bodies.rectangle(0, height / 2, 2, height, {isStatic: true}),
+  Bodies.rectangle(width, height / 2, 2, height, {isStatic: true}),
 ];
 World.add(world, walls);
 
@@ -119,7 +119,7 @@ horizontals.forEach((row, rowIndex) => {
       columnIndex * unitLength + unitLength / 2,
       rowIndex * unitLength + 1,
       unitLength,
-      10,
+      4,
       {
         isStatic: true
       }
@@ -135,7 +135,7 @@ verticals.forEach((row, rowIndex) => {
     const wall = Bodies.rectangle(
       columnIndex * unitLength + unitLength,
       rowIndex * unitLength + unitLength / 2,
-      10,
+      4,
       unitLength,
       {
         isStatic: true
@@ -144,3 +144,25 @@ verticals.forEach((row, rowIndex) => {
     World.add(world, wall);
   });
 });
+
+// World.add(world, Bodies.rectangle(unitLength * cells - unitLength / 2,
+//   unitLength * cells - unitLength / 2,
+//   unitLength / 4,
+//   unitLength / 4, 
+//   {
+//     isStatic: true
+//   }
+//   )
+// );
+
+const goal = Bodies.rectangle(
+  width - unitLength / 2,
+  height - unitLength / 2,
+  unitLength * .7,
+  unitLength * .7,
+  {
+    isStatic: true
+  }
+);
+
+World.add(world, goal);
