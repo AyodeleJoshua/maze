@@ -145,16 +145,7 @@ verticals.forEach((row, rowIndex) => {
   });
 });
 
-// World.add(world, Bodies.rectangle(unitLength * cells - unitLength / 2,
-//   unitLength * cells - unitLength / 2,
-//   unitLength / 4,
-//   unitLength / 4, 
-//   {
-//     isStatic: true
-//   }
-//   )
-// );
-
+// Goal
 const goal = Bodies.rectangle(
   width - unitLength / 2,
   height - unitLength / 2,
@@ -166,3 +157,16 @@ const goal = Bodies.rectangle(
 );
 
 World.add(world, goal);
+
+// Ball
+
+const ball = Bodies.circle(
+  unitLength / 2,
+  unitLength / 2,
+  unitLength / 4,
+  {
+    isStatic: true
+  }
+);
+
+World.add(world, ball);
