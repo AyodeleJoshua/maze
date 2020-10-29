@@ -9,6 +9,7 @@ const height = 600;
 const unitLength = width / cells;
 
 const engine = Engine.create();
+engine.world.gravity.y = 0;
 const { world } = engine;
 const render = Render.create({
   element: document.querySelector('.canva'),
@@ -170,22 +171,23 @@ World.add(world, ball);
 
 document.addEventListener('keydown', event => {
   const { x, y } = ball.velocity;
+  console.log(event)
 
-  if (event.keyCode === 87) {
+  if (event.keyCode === 38) {
     Body.setVelocity(ball, { x, y: y - 5 });
   }
   
-  if (event.keyCode === 68) {
+  if (event.keyCode === 39) {
     Body.setVelocity(ball, { x: x + 5, y });
     
   }
   
-  if (event.keyCode === 83) {
+  if (event.keyCode === 40) {
     Body.setVelocity(ball, { x, y: y + 5 });
     
   }
   
-  if (event.keyCode === 65) {
+  if (event.keyCode === 37) {
     Body.setVelocity(ball, { x: x - 5, y });
   }
 });
