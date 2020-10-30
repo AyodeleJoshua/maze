@@ -122,6 +122,7 @@ horizontals.forEach((row, rowIndex) => {
       unitLength,
       4,
       {
+        label: 'wall',
         isStatic: true
       }
     );
@@ -139,6 +140,7 @@ verticals.forEach((row, rowIndex) => {
       4,
       unitLength,
       {
+        label: 'wall',
         isStatic: true
       }
     );
@@ -201,10 +203,13 @@ Events.on(engine, 'collisionStart', event => {
   event.pairs.forEach((collision) => {
     const labels = ['balls', 'goals'];
 
-    if (labels.includes(collision.bodyA.label) && 
-        labels.includes(collision.bodyB.label)
-      ) {
-        console.log("win")
+    if (labels.includes(collision.bodyA.label) && labels.includes(collision.bodyB.label)) {
+      world.gravity.y = 1;
+      world.bodies.forEach(body => {
+        if (body.label === 'wall') {
+          Body.setStatic(body, false);
+        }
+      });
     }
   });
 });
