@@ -2,10 +2,8 @@
 
 const { Engine, Render, Runner, World, Bodies, Body, Events } = Matter;
 
-const createMaze = function () {
-
-  const cellsHorizontal = 3;
-  const cellsVertical = 3;
+  const cellsHorizontal = 5;
+  const cellsVertical = 5;
   
   const width = window.innerWidth;
   const height = window.innerHeight;
@@ -14,7 +12,6 @@ const createMaze = function () {
   const unitLengthY = height / cellsVertical;
   
   const engine = Engine.create();
-  engine.world.gravity.y = 0;
   const { world } = engine;
   const render = Render.create({
     element: document.querySelector('.canva'),
@@ -27,6 +24,9 @@ const createMaze = function () {
   });
   Render.run(render);
   Runner.run(Runner.create(), engine);
+  
+  const createMaze = function () {
+    engine.world.gravity.y = 0;
   
   // Walls
   const walls = [
@@ -223,22 +223,29 @@ const createMaze = function () {
       if (labels.includes(collision.bodyA.label) && labels.includes(collision.bodyB.label) && document.querySelector('.winner').classList.contains('hidden')) {
         let win = document.querySelector('.winner');
         win.classList.remove('hidden');
-        createButton(win);
         world.gravity.y = 1;
         world.bodies.forEach(body => {
           if (body.label === 'wall') {
             Body.setStatic(body, false);
           }
+          // Matter.Composite.remove(world, body);
         });
+        createButton(win);
       }
     });
   });
-}
-
+};
+createMaze();
 function createButton(element) {
   const btn = document.createElement('button');
   btn.innerText = 'Re-start game';
   btn.classList.add('button');
-  btn.addEventListener('click', createMaze);
+  btn.addEventListener('click', () => {
+    World.clear(engine.world);
+    Engine.clear(engine);
+    createMaze();
+    element.removeChild(btn);
+    element.classList.add('hidden');
+  });
   element.appendChild(btn);
 }
